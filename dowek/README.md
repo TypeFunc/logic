@@ -47,7 +47,7 @@ f is continuous then p = lim i (f i m) is the least fixed point of f .
 
 
 **Definition 1.5** (Strongly complete ordering) An ordering relation ≤ over a set E
-is strongly complete if E has a least element 0 and every  subset A of
+is strongly complete if E has a least element 0 and every nonempty subset A of
 E has a least upper bound, denoted by sup A. 
 
 **Exercise 1.1** Show that any strongly complete ordering is also weakly complete.  
@@ -61,7 +61,8 @@ Is the ordering
        \ /
         a
    
-weakly complete? Is it strongly complete?
+weakly complete? Is it strongly complete?  
+(Ans: yes; no.)
 
 **Proposition 1.2** If the ordering ≤ over the set E is strongly
 complete, then any subset A of E has a greatest lower bound, inf A.
@@ -80,7 +81,7 @@ Then l is th greatest lower bound of A. Why?
  
 
 
-(Ans: yes; no.)
+
 
 ### 1.1.2 Inductive Definitions
 ### 1.1.3 Structural Induction
