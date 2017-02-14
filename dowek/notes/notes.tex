@@ -1,0 +1,272 @@
+\begin{filecontents*}{inputs/refs.bib}
+@book {MR1275826,
+    AUTHOR = {Crole, Roy L.},
+     TITLE = {Categories for types},
+    SERIES = {Cambridge Mathematical Textbooks},
+ PUBLISHER = {Cambridge University Press, Cambridge},
+      YEAR = {1993},
+     PAGES = {xviii+335},
+      ISBN = {0-521-45092-6; 0-521-45701-7},
+   MRCLASS = {18D99 (03B15 03B40 03B70 03G30 18C10 68Q55)},
+  MRNUMBER = {1275826 (95h:18007)},
+MRREVIEWER = {Ji{\v{r}}{\'{\i}} Ad{\'a}mek},
+}
+@book {MR3012378,
+  AUTHOR = {Dowek, Gilles},
+  TITLE = {Proofs and algorithms},
+  SERIES = {Undergraduate Topics in Computer Science},
+  NOTE = {An introduction to logic and computability,
+    Translated from the French by Maribel Fernandez},
+  PUBLISHER = {Springer, London},
+  YEAR = {2011},
+  PAGES = {xii+155},
+  ISBN = {978-0-85729-120-2; 978-0-85729-121-9},
+  MRCLASS = {03-01 (68-01)},
+  MRNUMBER = {3012378},
+  DOI = {10.1007/978-0-85729-121-9},
+  URL = {http://dx.doi.org/10.1007/978-0-85729-121-9},
+}
+\end{filecontents*}
+\documentclass[11pt]{amsart}
+% The following \documentclass options may be useful:
+% preprint      Remove this option only once the paper is in final form.
+% 10pt          To set in 10-point type instead of 9-point.
+% 11pt          To set in 11-point type instead of 9-point.
+% numbers       To obtain numeric citation style instead of author/year.
+
+%% \usepackage{setspace}\onehalfspacing
+
+\usepackage{amsmath}
+\usepackage{amscd,amssymb,amsthm} %, amsmath are included by default
+\usepackage{latexsym,stmaryrd,mathrsfs,enumerate,scalefnt,ifthen}
+\usepackage{mathtools}
+\usepackage[mathcal]{euscript}
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+\usepackage{url}
+\usepackage{scalefnt}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage[margin=1in]{geometry}
+\usepackage{scrextend}
+
+%%////////////////////////////////////////////////////////////////////////////////
+%% Theorem styles
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{Fact}[theorem]{Fact}
+\newtheorem*{fact}{Fact}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{examples}[theorem]{Examples}
+\newtheorem{exercise}{Exercise}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{remark}{Remark}
+\newtheorem*{remarks}{Remarks}
+\newtheorem*{obs}{Observation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acronyms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \usepackage[acronym, shortcuts]{glossaries}
+%\usepackage[smaller]{acro}
+\usepackage[smaller]{acronym}
+\usepackage{xspace}
+
+%% \acs{CSP} -- short version of the acronym\\
+%% \acl{CSP} -- expanded acronym without mentioning the acronym.\\
+%% \acp{CSP} -- plurals.\\
+%% \acfp{CSP} -- long forms into plurals.\\
+%% \acsp{CSP} -- short form into a plural.\\
+%% \aclp{CSP} -- long form into a plural.\\
+%% \acfi{CSP} -- Full Name acronym in italics and abbreviated form in upshape.\\
+%% \acsu{CSP} -- short form of the acronym and marks it as used.\\
+%% \aclu{CSP} -- Prints the long form of the acronym and marks it as used.\\
+
+\acrodef{lics}[LICS]{Logic in Computer Science}
+\acrodef{sat}[SAT]{satisfiability}
+\acrodef{nae}[NAE]{not-all-equal}
+\acrodef{ctb}[CTB]{cube term blocker}
+\acrodef{tct}[TCT]{tame congruence theory}
+\acrodef{wnu}[WNU]{weak near-unanimity}
+\acrodef{CSP}[CSP]{constraint satisfaction problem}
+\acrodef{MAS}[MAS]{minimal absorbing subuniverse}
+\acrodef{MA}[MA]{minimal absorbing}
+\acrodef{cib}[CIB]{commutative idempotent binar}
+\acrodef{sd}[SD]{semidistributive}
+\acrodef{NP}[NP]{nondeterministic polynomial time}
+\acrodef{P}[P]{polynomial time}
+\acrodef{PeqNP}[P $ = $ NP]{P is NP}
+\acrodef{PneqNP}[P $ \neq $ NP]{P is not NP}
+
+%%% This enables markdown style bold and italic. %%%
+\makeatletter
+\def\starparse{\@ifnextchar*{\bfstarx}{\itstar}}
+\def\bfstarx#1{\@ifnextchar*{\bfitstar\@gobble}{\bfstar}}
+\makeatother
+\def\itstar#1*{\textit{#1}\starON}
+\def\bfstar#1**{\textbf{#1}\starON}
+\def\bfitstar#1***{\textbf{\textit{#1}}\starON}
+\def\starON{\catcode`\*=\active}
+\def\starOFF{\catcode`\*=12}
+\starON
+\def*{\starOFF \starparse}
+\starOFF
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{inputs/proof-dashed}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Put new macros in the macros.sty file
+\usepackage{inputs/macros}
+
+% \usepackage[backend=bibtex]{biblatex}
+% \bibliography{inputs/refs.bib}
+
+\begin{document}
+\starON
+\title[Notes on Dowek]{Notes on Dowek's\\
+ ``Proofs and Algorithms''}
+\date{\today}
+\author[W.~DeMeo and H.~Shin]{William DeMeo and Hyeyoung Shin}
+\address{University of Hawaii}
+\email{williamdemeo@gmail.com}
+\email{hyeyoungshinw@gmail.com}
+
+%% \thanks{The authors would like to extend special thanks to...}
+\begin{abstract}
+This document contains notes on the book~\cite{MR3012378}, {\it Proofs and
+Algorithms}, by by Gilles Dowek.  We exerpt the main definitions and theorems,
+we attempt to solve some exercises, and we resolve problems we found with some
+of the definitions and theorems in the original text. 
+\end{abstract}
+
+\maketitle
+
+
+\part{Proofs}
+
+\section{1 Predicate Logic}
+
+\subsection{Inductive Definitions}
+
+\subsubsection{The Fixed Point Theorem}\
+
+\noindent **Definition 1.2** (Weakly complete ordering) An ordering relation $\leq$ is said to be
+weakly complete if each increasing sequence has a limit.\\
+\\
+**Definition 1.3** (Increasing function) Let $\leq$ be an ordering relation over
+a set $E$ and $f$ a function from $E$ to $E$. The function $f$ is increasing if
+$x \leq y \Rightarrow f x \leq fy$. \\
+\\
+**Definition 1.4** (Continuous function) Let $\leq$ be a weakly complete ordering rela-
+tion over the set $E$, and $f$ an increasing function from $E$ to $E$. The function $f$ is
+continuous if for any increasing sequence $\lim_i (f u_i ) = f (\lim_i u_i )$.\\
+\\
+**Proposition 1.1** (First fixed point theorem) Let $\leq$ be a weakly complete ordering
+relation over a set $E$ that has a least element $m$. Let $f$ be a function from 
+$E$ to $E$. If $f$ is continuous then $p = \lim_i (f^i m)$ is the least fixed
+point of $f$. \\
+\\
+**Definition 1.5** (Strongly complete ordering) An ordering relation $\leq$ over a set $E$
+is strongly complete if $E$ has a least element 0 and every nonempty subset $A$ of
+$E$ has a least upper bound, denoted by $\sup A$.\footnote{Dowek's definition
+  does not require that $E$ has a least element and also does not require that
+  $A$ be nonempty.  These omissions cause problems.} \\
+\\
+**Exercise 1.1** Show that any strongly complete ordering is also weakly complete.  
+(done)\\
+\\
+Is the ordering shown below weakly complete? Is it strongly complete?  
+
+\begin{verbatim}
+    b       c
+     \     /
+      \   /
+       \ /
+        a
+\end{verbatim}
+(Answers: yes; no.)\\
+\\
+**Proposition 1.2** If the ordering $\leq$ over the set $E$ is strongly
+complete, then any nonempty subset $A$ of $E$ has a greatest lower bound, $\inf A$.\\[4pt]
+*Proof.* Let $A$ be a nonempty subset of $E$. $A$ has a least upper bound, 
+$\sup  A$. Define $B = \{ y \in E \mid (\forall x \in A)\, y \leq x \}$. 
+$B$ is a subset of $E$, it is nonempty since $\sup A$ exists. 
+Therefore, $B$ has a least upper bound, say, $l$. Note
+\begin{itemize}
+\item $(\forall y\in B) \, y \leq l$
+\item $\bigl((\forall y\in B)\, y \leq l'\bigr)\; \Rightarrow \; l \leq l'$.
+\end{itemize}
+
+Then $l$ is th greatest lower bound of $A$. Why?
+\begin{itemize}
+\item 
+ $l$ is a lower bound of $A$ since if $x \in A$, then $x$ is an upper bound of $B$ and
+ $l \leq x$.
+\item $l$ is the greatest lower bound since if $y$ is a lower bound of $A$, 
+$y$ is in $B$ and $y \leq l$.
+\end{itemize}
+
+\noindent **Proposition 1.3** (Second fixed point theorem) Let $\leq$ be a strongly
+  complete ordering over a set $E$. Let $f$ be a function from $E$ to E. If
+  $f$ is increasing then $p = \inf \{c \mid f c \leq c\}$ is the least fixed point
+  of $f$.\\
+\\
+*Proof.* Let $C$ be the set $\{c \mid f c \leq c\}$ and $c$ be an element of $C$. Then
+ $p \leq c$ since $p$ is $\inf C$. Since $f$ is increasing $f p \leq f c$. Note 
+ $f c \leq c$ because $c$ is an element of $C$. 
+
+\subsubsection{Inductive Definitions}
+\subsubsection{Structural Induction}
+\subsubsection{Derivations}
+\subsubsection{The Reflexive-Transitive Closure of a Relation}
+
+
+\subsection{Languages}
+
+\subsubsection{Languages Without Variables}
+\subsubsection{Variables}
+\subsubsection{Many-Sorted Languages}
+\subsubsection{Substitution}
+\subsubsection{Articulation}
+
+
+\subsection{The Languages of Predicate Logic}
+
+
+\subsection{Proofs}
+
+
+\subsection{Examples of Theories}
+
+
+\subsection{Variations on the Principle of the Excluded Middle}
+\subsubsection{Double Negation}
+\subsubsection{Multi-conclusion Sequents}
+
+\appendix
+
+% \section{Appendix}
+%% This is the text of the appendix, if you need one.
+
+%\bibliographystyle{amsplain} %% or amsalpha
+%% \bibliographystyle{plain-url}
+% \printbibliography
+\bibliographystyle{alphaurl}
+\bibliography{inputs/refs.bib}
+
+
+\end{document}
