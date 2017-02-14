@@ -78,8 +78,15 @@ Then l is th greatest lower bound of A. Why?
  l ≤ x.
  2. l is the greatest lower bound since if y is a lower bound of A, y
  is in B and y ≤ l.
- 
 
+
+**Proposition 1.3** (Second fixed point theorem) Let ≤ be a strongly
+  complete ordering over a set E. Let f be a function from E to E. If
+  f is increasing then p = inf {c | f c ≤ c} is the least fixed point
+  of f.
+
+*Proof.* Let C be the set {c | f c ≤ c} and c be an element of C. Then
+ p ≤ c since p is inf C. Since f is increasing f p ≤ f c. 
 
 
 
