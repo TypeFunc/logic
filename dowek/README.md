@@ -65,9 +65,9 @@ weakly complete? Is it strongly complete?
 (Ans: yes; no.)
 
 **Proposition 1.2** If the ordering ≤ over the set E is strongly
-complete, then any subset A of E has a greatest lower bound, inf A.
+complete, then any nonempty subset A of E has a greatest lower bound, inf A.
 
-*Proof.* Let A be a subset of E. A has a least upper bound, sup
+*Proof.* Let A be a nonempty subset of E. A has a least upper bound, sup
  A. Define B = { y in E | forall x in A, y ≤ x }. B is a subset of E,
  so it has a least upper bound, say l. Note
  1. forall y in B, y ≤ l
@@ -86,7 +86,8 @@ Then l is th greatest lower bound of A. Why?
   of f.
 
 *Proof.* Let C be the set {c | f c ≤ c} and c be an element of C. Then
- p ≤ c since p is inf C. Since f is increasing f p ≤ f c. 
+ p ≤ c since p is inf C. Since f is increasing f p ≤ f c. Note f c ≤ c
+ because c is an element of C. 
 
 
 
