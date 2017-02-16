@@ -166,7 +166,7 @@ section.
 Let $E$ be a set.  A *binary relation* on $E$ is a subset of $E\times E$.
 If $\leq$ is a binary relation on $E$ that satisfies properties (1)--(3) below, 
 then we call $\leq$ a *partial order* and we call the pair
-$\<E, \leq\>$ a *partially ordered set*.
+$\<E, \leq\>$ a *partially ordered set* or *poset*.
 \begin{enumerate}
 \item $(\forall x) \, (x\in E \, \longrightarrow \, x\leq x)$;
 \item $(\forall x, y)\, %(\forall y) \,
@@ -184,41 +184,43 @@ when (3) holds we say ``$\leq$ is transitive''.
 
 \subsubsection{The Fixed Point Theorem}\
 
-\noindent **Definition 1.2** (Weakly complete ordering) An partial order relation
-$\leq$ is said to be weakly complete if each increasing sequence has a 
+\noindent **Definition 1.2** (Weakly complete partial order) An partial order relation
+$\leq$ on a set $E$ is said to be *weakly complete* if each increasing sequence has a 
 limit.\footnote{A \emph{sequence} is a function whose domain is
 the set $\mathbb{N} = \{0,1,\dots\}$ of natural numbers, so Definition 1.3
 can be used to infer what we mean by ``increasing sequence'' in Definition 1.2, although,
 the domain of a sequence need not be $\mathbb{N}$. So, more precisely, 
 an \emph{increasing sequence} is an \emph{poset homomorphism} $u: \<\N, \leq\> \to
-\<E, \leq \>$; that is, if $n\leq m$ in $\mathbb{N}$, then $u_n \leq u_m$ in $E$.}\\
+\<E, \leq \>$; that is, if $n\leq m$ in $\mathbb{N}$, then $u_n \leq u_m$ in
+$E$.} In this case, we call the pair $\<E, \leq\>$ a *weakly complete poset*.\\
 \\
-**Definition 1.3** (Increasing function) Let $\leq$ be an ordering relation over
-a set $E$ and $f$ a function from $E$ to $E$. The function $f$ is increasing if
+**Definition 1.3** (Increasing function) Let $\<E, \leq\>$ be a poset
+and $f$ a function from $E$ to $E$. The function $f$ is increasing if
 $x \leq y \Rightarrow f x \leq fy$. \\
 \\
-**Definition 1.4** (Continuous function) Let $\leq$ be a weakly complete
-ordering relation over the set $E$, and $f$ an increasing function from $E$ to
-$E$. The function $f$ is continuous if for every increasing sequence $(u_i)_i$
+**Definition 1.4** (Continuous function) Let $\<E, \leq\>$ be a weakly complete poset
+and $f$ an increasing function from $E$ to $E$. 
+The function $f$ is continuous if for every increasing sequence $(u_i)_i$
 we have  $\lim_i (f u_i ) = f (\lim_i u_i )$.\\
 \\
-**Proposition 1.1** (First fixed point theorem) Let $\leq$ be a weakly complete ordering
-relation over a set $E$ that has a least element $m$. Let $f$ be a function from 
-$E$ to $E$. If $f$ is continuous then $p = \lim_i (f^i m)$ is the least fixed
+**Proposition 1.1** (First fixed point theorem) Let $\<E,\leq\>$ be a weakly complete
+poset that has a least element $m$. Let $f$ be a function from $E$ to $E$. 
+If $f$ is continuous then $p = \lim_i (f^i m)$ is the least fixed
 point of $f$. \\
 \\
-**Definition 1.5** (Strongly complete ordering) An ordering relation $\leq$ over a set $E$
-is strongly complete if every subset $A$ of
-$E$ has a least upper bound, denoted by $\sup A$.\footnote{Notice that this definition
+**Definition 1.5** (Strongly complete ordering) A partial order $\leq$ on a set $E$
+is *strongly complete* if every subset $A$ of
+$E$ has a least upper bound, denoted by $\sup A$.
+In this case, we call the pair $\<E, \leq\>$ a *strongly complete poset*.\footnote{Notice that this definition
   does not require $E$ have a least element and also does not require
   $A$ be nonempty.  This is not a problem. In fact, it is implicit in this definition that
   $E$ contain a least element---namely, $\sup \emptyset$---as well as a greatest 
   element---namely, $\sup E$.}\\
 \\
-**Exercise 1.1** Show that any strongly complete ordering is also weakly complete.  
+**Exercise 1.1** Show that every strongly complete partial order is also weakly complete.  
 (done)\\
 \\
-Is the ordering shown below weakly complete? Is it strongly complete?  
+Is the poset shown below weakly complete? Is it strongly complete?  
 
 \begin{verbatim}
     b       c
@@ -229,19 +231,19 @@ Is the ordering shown below weakly complete? Is it strongly complete?
 \end{verbatim}
 (Answers: yes; no.)\\
 \\
-**Proposition 1.2** If the ordering $\leq$ over the set $E$ is strongly
-complete, then every subset $A$ of $E$ has a greatest lower bound, $\inf A$.\\[4pt]
-*Proof.* If $A$ is a nonempty subset of $E$, then $A$ has a least upper bound
-$\sup  A$, since $\leq$ is strongly complete. 
-The subset $B = \{ y \in E \mid (\forall x \in A)\, y \leq x \}$ 
-of $E$ is nonempty since $\sup A\in B$.
-Therefore, $B$ has a least upper bound, say, $l$. Note
+**Proposition 1.2** If $\<E, \leq\>$ is
+*strongly complete*, then every subset $A$ of $E$ has a 
+greatest lower bound, $\inf A$.\\[4pt]
+*Proof.* 
+Since $\leq$ is strongly complete, $\sup  A\in E$ exists.
+Similarly, the subset $B = \{ y \in E \mid (\forall x \in A)\, y \leq x \}$ 
+has a least upper bound, say, $l$. Note
 \begin{itemize}
 \item $(\forall y\in B) \, y \leq l$
 \item $\bigl((\forall y\in B)\, y \leq l'\bigr)\; \Rightarrow \; l \leq l'$.
 \end{itemize}
 
-Then $l$ is th greatest lower bound of $A$. Why?
+Then $l$ is the greatest lower bound of $A$. Why?
 \begin{itemize}
 \item 
  $l$ is a lower bound of $A$ since if $x \in A$, then $x$ is an upper bound of $B$ and
@@ -253,7 +255,7 @@ $y$ is in $B$ and $y \leq l$.
 \medskip
 
 \noindent **Proposition 1.3** (Second fixed point theorem) Let $\<E, \leq\>$ be a strongly
-  complete partially ordered set.  Let $f$ be a function from $E$ to $E$. If
+  complete poset.  Let $f$ be a function from $E$ to $E$. If
   $f$ is increasing then $p = \inf \{c \mid f c \leq c\}$ is the least fixed point
   of $f$.\\
 \\
